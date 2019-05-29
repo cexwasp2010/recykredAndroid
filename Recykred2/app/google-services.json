@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "826415754220",
+    "firebase_url": "https://recykred.firebaseio.com",
+    "project_id": "recykred",
+    "storage_bucket": "recykred.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826415754220:android:d088466c6fcd1d0a",
+        "android_client_info": {
+          "package_name": "com.recykred.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826415754220-vlk2q8hj0s60qo5hft9014cprj0kqed5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.recykred.app",
+            "certificate_hash": "d2782d27ef0b48fe1b3683152265f05d4bedee94"
+          }
+        },
+        {
+          "client_id": "826415754220-s4bq0jfghej1dt8t3r1tvr7ntdl47g64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDknre0fW_Mx7DSvE0bXD51T7B3HypbjwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826415754220-s4bq0jfghej1dt8t3r1tvr7ntdl47g64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
