@@ -110,16 +110,17 @@ public class Pedidos2Activity extends AppCompatActivity {
                         .subscribeWith(new DisposableObserver<List<Usuario>>() {
                             @Override
                             public void onNext(List<Usuario> usuarios) {
+                                Log.d("aca","usuario = " + usuario.getNumero_celular());
                                 for(int i=0;i<usuarios.size(); i++){
                                     Log.d("aca","usuario = " + usuarios.get(i).getNumero_celular());
                                     AndroidNetworking.post("https://rest.nexmo.com/sms/json")
                                             .addHeaders("Content-Type","application/x-www-form-urlencoded")
                                             .addBodyParameter("api_key","f4fa3858")
                                             .addBodyParameter("api_secret","iCqZxpmgFOTlPLB7")
-                                            .addBodyParameter("from","user")
-                                            .addBodyParameter("text","El pedido " +pedido1.getId_pedido() + " esta Disponible para recoleccion el "+
-                                                    pedido1.getFecha_creacion() +" en la calle " + pedido1.getDireccion_recogida() + " por favor responda " +
-                                                    pedido1.getId_pedido()+"RC+ tu codigo al 3169826425")
+                                            .addBodyParameter("from",usuario.getNumero_celular())
+                                            .addBodyParameter("text","El pedido " +pedido1.getId_pedido() + " esta disponible para recoger el "+
+                                                    pedido1.getFecha_creacion() +" en " + pedido1.getDireccion_recogida() + ", responda " +
+                                                    pedido1.getId_pedido()+"RC+ tu codigo al "+usuario.getNumero_celular())
                                             .addBodyParameter("to","+"+usuarios.get(i).getNumero_celular())
 
                                             .build().getAsString(new StringRequestListener() {

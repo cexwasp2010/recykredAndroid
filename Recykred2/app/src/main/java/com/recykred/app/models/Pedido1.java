@@ -48,9 +48,7 @@ public class Pedido1 implements Serializable {
         this.estado = estado;
     }
 
-    public String getId_cliente() {
-        return this.id_cliente;
-    }
+    public String getId_cliente() { return this.id_cliente; }
 
     public void setId_cliente(String id_cliente) {
         this.id_cliente = id_cliente;

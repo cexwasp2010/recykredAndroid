@@ -76,9 +76,9 @@ public class PedidosDetalles extends AppCompatActivity {
                        etFecha.setText(pedidos.getFeha_recogida());
                        etEstado.setText(pedidos.getEstado());
                        etFechaCreacion.setText(pedidos.getFecha_creacion());
-                       etRecogidoPor.setText(pedidos.getId_centro_acopio());
+                       etRecogidoPor.setText(pedidos.getId_reciclador());
                        etSolicitado.setText(pedidos.getId_cliente());
-                       etTomadoPor.setText(pedidos.getId_reciclador());
+                       etTomadoPor.setText(pedidos.getId_centro_acopio());
                         pedidosMaterialesList.addAll(pedidos.getMateriales());
                         adapter.notifyDataSetChanged();
 

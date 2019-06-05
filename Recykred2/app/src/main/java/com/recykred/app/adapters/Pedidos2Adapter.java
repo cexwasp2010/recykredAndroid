@@ -46,7 +46,7 @@ public class Pedidos2Adapter extends RecyclerView.Adapter<Pedidos2Adapter.MyView
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
         myViewHolder.txtEstado.setText(pedidosList.get(i).getEstado());
-        myViewHolder.txtMaterial.setText(pedidosList.get(i).getId_cliente());
+        myViewHolder.txtMaterial.setText(pedidosList.get(i).getId_pedido());
         myViewHolder.txtPeso.setText(pedidosList.get(i).getPeso());
         myViewHolder.btnAccion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +60,7 @@ public class Pedidos2Adapter extends RecyclerView.Adapter<Pedidos2Adapter.MyView
                 myViewHolder.btnAccion.setText("Tomar");
                 break;
             case "2":
-                myViewHolder.btnAccion.setText("Recibido");
+                myViewHolder.btnAccion.setText("Recibir");
                 break;
             case "3":
                 myViewHolder.btnAccion.setText("ver");

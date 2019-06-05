@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.StringRequestListener;
 import com.recykred.app.models.Usuario;
 import com.recykred.app.retrofit.RetrofitApi;
 import com.recykred.app.retrofit.RetrofitClient;
@@ -70,7 +73,27 @@ public class AgregarReciclador extends AppCompatActivity {
                                     output.putExtra("reciclador",reciclador);
                                     setResult(RESULT_OK, output);
                                     Toast.makeText(AgregarReciclador.this,"Reciclador agregado con exito",Toast.LENGTH_SHORT).show();
-                                    finish();
+                                    AndroidNetworking.post("https://rest.nexmo.com/sms/json")
+                                            .addHeaders("Content-Type","application/x-www-form-urlencoded")
+                                            .addBodyParameter("api_key","f4fa3858")
+                                            .addBodyParameter("api_secret","iCqZxpmgFOTlPLB7")
+                                            .addBodyParameter("from","user")
+                                            .addBodyParameter("text","Se ha registrado con el código: RC" + reciclador.getId_usuario()+" ")
+                                            .addBodyParameter("to","+"+reciclador.getNumero_celular())
+                                            .build().getAsString(new StringRequestListener() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            Log.d("registro_reciclador","respuesta = " + response);
+                                            finish();
+                                            startActivity(getIntent().putExtra("usuario",usuario).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+
+                                        }
+
+                                        @Override
+                                        public void onError(ANError anError) {
+                                            Log.d("aca","error = " + anError.getErrorBody());
+                                        }
+                                    });
                                 }
 
                                 @Override

@@ -56,7 +56,7 @@ public class Usuario implements Serializable {
     }
 
     public String getNumero_celular() {
-        return this.numero_celular;
+        return "57"+this.numero_celular;
     }
 
     public void setNumero_celular(String numero_celular) {
@@ -88,7 +88,7 @@ public class Usuario implements Serializable {
     }
 
     public String getNombres() {
-        return this.nombres;
+        return this.nombres + " " + this.apellidos;
     }
 
     public void setNombres(String nombres) {
