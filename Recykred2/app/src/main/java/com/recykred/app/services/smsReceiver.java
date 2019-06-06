@@ -10,7 +10,11 @@ import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.StringRequestListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,7 +38,7 @@ public class smsReceiver  extends BroadcastReceiver {
             Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
             if(str.contains("RC")){
                 String userId = str.substring(4,str.length());
-                String pedidoId = str.substring(0,2);
+                final String pedidoId = str.substring(0,2);
                 Log.d("aca","userID" + userId);
                 Log.d("aca","pedidoID = " + pedidoId);
 
@@ -47,10 +51,36 @@ public class smsReceiver  extends BroadcastReceiver {
                         .addBodyParameter("estado_id","3")
                         .addBodyParameter("fecha_actualizacion",currentDateandTime)
                         .build()
-                        .getAsString(new StringRequestListener() {
+                        .getAsJSONArray(new JSONArrayRequestListener() {
                             @Override
-                            public void onResponse(String response) {
-                                Log.d("aca","response = " + response);
+                            public void onResponse(JSONArray response) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
+                                    try {
+                                        String celular = response.getJSONObject(i).getString("numero_celular");
+                                        Log.d("celular","57" + celular);
+                                        AndroidNetworking.post("https://rest.nexmo.com/sms/json")
+                                                .addHeaders("Content-Type","application/x-www-form-urlencoded")
+                                                .addBodyParameter("api_key","f4fa3858")
+                                                .addBodyParameter("api_secret","iCqZxpmgFOTlPLB7")
+                                                .addBodyParameter("from","recykred")
+                                                .addBodyParameter("text","El pedido "+ pedidoId + " ya fue asignado y no se encuentra disponible.")
+                                                .addBodyParameter("to","+57"+celular)
+                                                .build().getAsString(new StringRequestListener() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                Log.d("notificación","respuesta = " + response);
+                                            }
+
+                                            @Override
+                                            public void onError(ANError anError) {
+                                                Log.d("aca","error = " + anError.getErrorBody());
+                                            }
+                                        });
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
                             }
 
                             @Override

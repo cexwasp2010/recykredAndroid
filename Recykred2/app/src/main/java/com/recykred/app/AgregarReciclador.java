@@ -78,7 +78,7 @@ public class AgregarReciclador extends AppCompatActivity {
                                             .addBodyParameter("api_key","f4fa3858")
                                             .addBodyParameter("api_secret","iCqZxpmgFOTlPLB7")
                                             .addBodyParameter("from","user")
-                                            .addBodyParameter("text","Se ha registrado con el código: RC" + reciclador.getId_usuario()+" ")
+                                            .addBodyParameter("text","Se ha registrado con el código: RC" + reciclador.getId_usuario()+ " ")
                                             .addBodyParameter("to","+"+reciclador.getNumero_celular())
                                             .build().getAsString(new StringRequestListener() {
                                         @Override
